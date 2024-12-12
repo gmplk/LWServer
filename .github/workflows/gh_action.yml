@@ -21,7 +21,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ vars.DOCKERHUB_USERNAME }}/LWServer
+          images: ${{ vars.DOCKERHUB_USERNAME }}/lwserver
           flavor: latest=false
           tags: |
             type=sha,priority=100,prefix=sha-,format=short
@@ -53,9 +53,9 @@ jobs:
           sbom: true
           provenance: mode=max
           cache-from: |
-            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/LWServer:cache 
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/lwserver:cache 
           cache-to: |
-            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/LWServer:cache  
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/lwserver:cache  
           tags: ${{ steps.meta.outputs.tags }}
           
       - 
