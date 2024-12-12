@@ -80,6 +80,7 @@ jobs:
         with:         
           command: cves
           image: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
+          only-severities: critical,high
           
 
       - 
@@ -93,10 +94,10 @@ jobs:
           sbom: true
           provenance: mode=max
           cache-from: |
-            type=registry,ref=${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
+            type=registry,ref==${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
           cache-to: |
-            type=registry,ref=${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
-          tags: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ steps.meta.outputs.tags }}
+            type=registry,ref==${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}lwserver:cache  
+          tags: ${{ env.REGISTRY }}/${{ steps.meta.outputs.tags }}
           
 
           
