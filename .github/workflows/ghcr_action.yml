@@ -79,7 +79,7 @@ jobs:
         uses: docker/scout-action@v1.15.1
         with:         
           command: cves
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
           organization: ${{ vars.REGISTRY_USERNAME }}
 
       - 
