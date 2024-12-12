@@ -81,6 +81,7 @@ jobs:
           command: cves
           image: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
           only-severities: critical,high
+          exit-on: vulnerability
           
 
       - 
