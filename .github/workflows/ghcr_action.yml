@@ -80,7 +80,7 @@ jobs:
         with:         
           command: cves
           image: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
-          organization: ${{ vars.REGISTRY_USERNAME }}
+          
 
       - 
         name: Build and push Docker image
