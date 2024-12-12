@@ -10,6 +10,8 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
+  TEST_TAG: test
+  
 
 jobs:
   ci_step:
@@ -49,6 +51,31 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
 
       - 
+        name: Build and load to test
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          load: true
+          sbom: true
+          provenance: mode=max
+          cache-from: |
+            type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
+          cache-to: |
+            type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
+          tags: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
+
+      - 
+        name: Docker Scout
+        
+        uses: docker/scout-action@v1.15.1
+        with:         
+          command: cves
+          image: ${{ steps.meta.outputs.tags }}
+          organization: ${{ vars.REGISTRY_USERNAME }}
+
+      - 
         name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -62,16 +89,7 @@ jobs:
             type=registry,ref=${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
           cache-to: |
             type=registry,ref=${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
-          tags: ${{ steps.meta.outputs.tags }}
-          
-      - 
-        name: Docker Scout
-        
-        uses: docker/scout-action@v1.15.1
-        with:         
-          command: cves
-          image: ${{ steps.meta.outputs.tags }}
-          organization: ${{ vars.REGISTRY_USERNAME }}
+          tags: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ steps.meta.outputs.tags }}
           
 
           
