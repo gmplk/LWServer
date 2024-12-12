@@ -94,9 +94,9 @@ jobs:
           sbom: true
           provenance: mode=max
           cache-from: |
-            type=registry,ref==${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
+            type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
           cache-to: |
-            type=registry,ref==${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}lwserver:cache  
+            type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
           tags: ${{ env.REGISTRY }}/${{ steps.meta.outputs.tags }}
           
 
