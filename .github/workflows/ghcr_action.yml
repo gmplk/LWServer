@@ -61,10 +61,10 @@ jobs:
           sbom: true
           provenance: mode=max
           cache-from: |
-            type=registry,ref=${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
+            type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
           cache-to: |
-            type=registry,ref=${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
-          tags: ${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
+            type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
+          tags: ${{ vars.REGISTRY_USERNAME }}/lwserver:${{ env.TEST_TAG }}
 
       - 
         name: Docker Scout
