@@ -63,11 +63,11 @@ jobs:
         
         uses: docker/scout-action@v1.15.1
         with:
-          # Command(s) to run.
-         command: quickview,compare
-         image: ${{ steps.meta.outputs.tags }}
-         to-latest: true
-         organization: ${{ vars.DOCKERHUB_USERNAME }}
+            command: cves,recommendations,compare
+            to-latest: true
+            ignore-base: true
+            ignore-unchanged: true
+            only-fixed: true
           
 
           
