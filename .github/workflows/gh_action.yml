@@ -67,6 +67,7 @@ jobs:
          command: quickview,compare
          image: ${{ steps.meta.outputs.tags }}
          to-latest: true
+         organization: ${{ vars.DOCKERHUB_USERNAME }}
           
 
           
