@@ -62,12 +62,10 @@ jobs:
         name: Docker Scout
         
         uses: docker/scout-action@v1.15.1
-        with:
-            command: cves,recommendations,compare
-            to-latest: true
-            ignore-base: true
-            ignore-unchanged: true
-            only-fixed: true
+        with:         
+          command: cves
+          image: docker.io/${{ vars.DOCKERHUB_USERNAME }}:${{ steps.meta.outputs.tags }}
+          organization: ${{ vars.DOCKERHUB_USERNAME }}
           
 
           
