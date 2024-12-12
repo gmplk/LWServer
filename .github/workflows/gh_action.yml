@@ -64,7 +64,7 @@ jobs:
         uses: docker/scout-action@v1.15.1
         with:         
           command: cves
-          image: docker.io/${{ vars.DOCKERHUB_USERNAME }}:${{ steps.meta.outputs.tags }}
+          image: ${{ steps.meta.outputs.tags }}
           organization: ${{ vars.DOCKERHUB_USERNAME }}
           
 
