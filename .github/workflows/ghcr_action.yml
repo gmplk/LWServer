@@ -98,7 +98,9 @@ jobs:
             type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache 
           cache-to: |
             type=registry,ref=${{ env.REGISTRY }}/${{ vars.REGISTRY_USERNAME }}/lwserver:cache  
-          tags: ${{ env.REGISTRY }}/${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ steps.meta.outputs.tags }}
+            ${{ env.REGISTRY }}/gmplk/lwserver_pub:latest
           
 
           
